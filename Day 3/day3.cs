@@ -31,12 +31,7 @@ namespace Advent_of_Code
 
             foreach (var line in input)
             {
-                var lettersByCount = line.ToLookup(p => p.ToString());
-                var twoletters = lettersByCount.Where(p => p.Count() == 2).Select(p => p.Key).Count();
-                var threeletters = lettersByCount.Where(p => p.Count() == 3).Select(p => p.Key).Count();
 
-                twos += (twoletters > 0 ? 1 : 0);
-                threes += (threeletters > 0 ? 1 : 0);
             }
 
             return twos * threes;
@@ -48,38 +43,13 @@ namespace Advent_of_Code
             string diff = "";
             foreach (var line in input)
             {
-                foreach (var line2 in input)
-                {
-                    diff = stringDistance(line, line2);
-                    if (diff != "")
-                    {
-                        return diff;
-                    }
-                }
+                
             }
 
 
             return "";
         }
 
-        public static string stringDistance(string stringOne, string stringTwo)
-        {
-            int distance = 0;
-            for (int i = 0; i < stringOne.Length; i++)
-            {
-                distance += stringOne.Substring(i, 1) != stringTwo.Substring(i, 1) ? 1 : 0;
-            }
-
-            if (distance != 1)
-                return "";
-
-            string diff = "";
-            for (int i = 0; i < stringOne.Length; i++)
-            {
-                diff += stringOne.Substring(i, 1) == stringTwo.Substring(i, 1) ? stringOne.Substring(i, 1) : "";
-            }
-            return diff;
-        }
 
         public static dynamic getInput(String ReturnType)
         {
@@ -99,7 +69,7 @@ namespace Advent_of_Code
                 return input;
 
             }
-            else
+            else if ((ReturnType == "string"))
             {
                 List<string> input = new List<string>();
                 while (!sr.EndOfStream)
@@ -107,6 +77,11 @@ namespace Advent_of_Code
                     input.Add(sr.ReadLine());
                 }
                 return input;
+            }
+
+            else
+            {
+                return sr;
             }
         }
     }
