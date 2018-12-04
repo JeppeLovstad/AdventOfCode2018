@@ -28,9 +28,8 @@ namespace Advent_of_Code
 
         private static int PartOneSolve(List<String> input)
         {
-            List<int[]> claims = new List<int[]>();
-            int maxRow = 0;
-            int maxCol = 0;
+            Dictionary<string, int> claimedFabric = new Dictionary<string, int>();
+            int duplicatesFound = 0;
 
             foreach (var line in input)
             {
@@ -44,34 +43,14 @@ namespace Advent_of_Code
                 int colAmount = Convert.ToInt32(claim[2].Split('x')[0]);
                 int rowAmount = Convert.ToInt32(claim[2].Split('x')[1]);
 
-                maxCol = Math.Max(maxCol, colPos+ colAmount);
-                maxRow = Math.Max(maxRow, rowPos + rowAmount);
-
-                claims.Add(new int[] { id, colPos, rowPos, colAmount, rowAmount });
-
-                
-            }
-
-            Dictionary<string, int> claimedFabric = new Dictionary<string, int>();
-            int duplicatesFound = 0;
-            foreach (var claim in claims)
-            {
-                int id = claim[0];
-
-                int colPos = claim[1];
-                int rowPos = claim[2];
-
-                int colAmount = claim[3];
-                int rowAmount = claim[4];
-
-                for (int i = colPos; i < colPos+colAmount; i++)
+                for (int i = colPos; i < colPos + colAmount; i++)
                 {
                     for (int j = rowPos; j < rowPos + rowAmount; j++)
                     {
                         string key = i + "," + j;
                         if (claimedFabric.ContainsKey(key))
                         {
-                            if(claimedFabric[key] == 1)
+                            if (claimedFabric[key] == 1)
                             {
                                 duplicatesFound++;
                             }
@@ -82,25 +61,8 @@ namespace Advent_of_Code
                             claimedFabric.Add(key, 1);
                         }
                     }
-                }
+                }              
             }
-            /*
-            for (int i = 0; i < 1000; i++)
-            {
-                for (int j = 0; j < 1000; j++)
-                {
-                    if (claimedFabric.TryGetValue(j + "," + i, out int t))
-                    {
-                        Debug.Write(t);
-                    }
-                    else
-                    {
-                        Debug.Write(".");
-                    }
-                }
-                Debug.WriteLine("");
-            }*/
-
 
             return duplicatesFound;
         }
@@ -133,7 +95,6 @@ namespace Advent_of_Code
             }
 
             Dictionary<string, int> claimedFabric = new Dictionary<string, int>();
-            int idToReturn = 0;
             foreach (var claim in claims)
             {
                 int id = claim[0];
