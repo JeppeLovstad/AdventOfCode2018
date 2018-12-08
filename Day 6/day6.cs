@@ -11,8 +11,8 @@ namespace Advent_of_Code
 {
     class Program
     {
-        private const string V = "Day 5 - Part 1: ";
-        private const string V1 = "Day 5 - Part 2: ";
+        private const string V = "Day 6 - Part 1: ";
+        private const string V1 = "Day 6 - Part 2: ";
 
         static void Main(string[] args)
         {
